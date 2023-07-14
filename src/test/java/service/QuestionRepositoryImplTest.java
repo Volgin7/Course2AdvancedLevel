@@ -56,6 +56,7 @@ public class QuestionRepositoryImplTest {
     @Test
     @DisplayName("Test of getRandom question method")
     void getRandomQuestionTest() {
+        Assertions.assertNull (repository.getRandomQuestion());
         repository.add("Question 1", "Answer 1");
         repository.add("Question 2", "Answer 2");
         Assertions.assertNotNull (repository.getRandomQuestion());
