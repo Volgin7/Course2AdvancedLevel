@@ -21,13 +21,13 @@ public class ExaminerServiceImpl implements ExaminerService {
 
     @Override
     public List<Question> getQuestions(int amount) {
-        Set<Question> questions = new HashSet<>();
         if(amount > serviceJQ.getQuestionsList().size() + serviceMQ.getQuestionsList().size()) {
-            throw new NotEnoughQuestionsException("Not Enough Questions");
+           throw new NotEnoughQuestionsException("Not Enough Questions");
         }
+
+        Set<Question> questions = new HashSet<>();
         Random random = new Random();
-        int key = random.nextInt(2);
- //       System.out.println("key = " + key);
+        int key = random.nextInt(2); // if key == 0 => java  or if key ==1 => math
         while (questions.size() < amount) {
             Question question;
             if(key == 0) {
