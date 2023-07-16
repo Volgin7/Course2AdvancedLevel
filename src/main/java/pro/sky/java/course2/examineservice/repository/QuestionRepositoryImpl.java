@@ -45,16 +45,5 @@ public class QuestionRepositoryImpl implements QuestionRepository {
         return Collections.unmodifiableList(questionsList);
     }
 
-    @Override
-    public Question getRandomQuestion() {
-        Random random = new Random();
-        if(questionsList.size() == 0) {
-            return null;
-        }
-        int i = random.nextInt(questionsList.size());
-        Question randomQuestion = new Question(questionsList.get(i).getQuestion(), questionsList.get(i).getAnswer());
-        return randomQuestion;
-    }
-
 
 }
