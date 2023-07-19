@@ -7,49 +7,51 @@ import org.junit.jupiter.api.Test;
 import pro.sky.java.course2.examineservice.model.Question;
 import pro.sky.java.course2.examineservice.repository.QuestionRepository;
 import pro.sky.java.course2.examineservice.repository.QuestionRepositoryImpl;
+import pro.sky.java.course2.examineservice.service.QuestionServiceImpl;
 
 import java.util.Collection;
 
-public class QuestionRepositoryImplTest {
+public class QuestionServiceImplTest {
 
-    private QuestionRepository repository;
+    private QuestionServiceImpl service;
     @BeforeEach
     public void init() {
-        repository = new QuestionRepositoryImpl();
+        QuestionRepository repository = new QuestionRepositoryImpl();
+        service = new QuestionServiceImpl(repository);
     }
     @Test
     @DisplayName("Test of add question method. Positive")
     void addPositiveTest() {
         Question newQuestion = new Question("New question 1", "New answer 1");
-        Assertions.assertTrue(repository.add("New question 1", "New answer 1").equals(newQuestion));
+        Assertions.assertTrue(service.add("New question 1", "New answer 1").equals(newQuestion));
     }
     @Test
     @DisplayName("Test of add question method. Negative")
     void addNegativeTest() {
-        repository.add("Question 2","Answer 2");
-        Assertions.assertNull(repository.add("Question 2","Answer 2"));
+        service.add("Question 2","Answer 2");
+        Assertions.assertNull(service.add("Question 2","Answer 2"));
     }
     @Test
     @DisplayName("Test of remove question method. Positive")
     void removePositiveTest() {
-        repository.add("Question 1", "Answer 1");
+        service.add("Question 1", "Answer 1");
         Question newQuestion = new Question("Question 1", "Answer 1");
-        Assertions.assertTrue(repository.remove("Question 1", "Answer 1").equals(newQuestion));
+        Assertions.assertTrue(service.remove("Question 1", "Answer 1").equals(newQuestion));
     }
     @Test
     @DisplayName("Test of java question method. Negative")
     void removeNegativeTest() {
-        repository.add("Question 1", "Answer 1");
-        Assertions.assertNull(repository.remove("Another Question","Another Answer"));
+        service.add("Question 1", "Answer 1");
+        Assertions.assertNull(service.remove("Another Question","Another Answer"));
     }
 
     @Test
     @DisplayName("Test of getAll question method")
     void getAllTest() {
         Collection<Question> allQuestions;
-        repository.add("Question 1", "Answer 1");
-        repository.add("Question 2", "Answer 2");
-        allQuestions = repository.getAll();
+        service.add("Question 1", "Answer 1");
+        service.add("Question 2", "Answer 2");
+        allQuestions = service.getAll();
         Assertions.assertEquals(2, allQuestions.size());
         Assertions.assertNotNull (allQuestions);
     }

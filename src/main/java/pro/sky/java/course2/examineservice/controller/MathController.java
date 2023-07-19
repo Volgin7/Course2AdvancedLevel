@@ -21,16 +21,16 @@ public class MathController {
 
     @GetMapping("/add")
     public Question addQuestion(@RequestParam String question, @RequestParam String answer) {
-        return serviceMQ.getRepository().add(question, answer);
+        return serviceMQ.add(question, answer);
     }
 
     @GetMapping("/remove")
     public Question removeQuestion(@RequestParam String question, @RequestParam String answer) {
-        return serviceMQ.getRepository().remove(question, answer);
+        return serviceMQ.remove(question, answer);
     }
     @GetMapping
     public Collection<Question> getAll() {
-        return serviceMQ.getRepository().getAll();
+        return serviceMQ.getAll();
     }
 
 }

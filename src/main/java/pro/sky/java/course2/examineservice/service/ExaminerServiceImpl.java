@@ -21,7 +21,7 @@ public class ExaminerServiceImpl implements ExaminerService {
 
     @Override
     public List<Question> getQuestions(int amount) {
-        if(amount > serviceJQ.getRepository().getAll().size() + serviceMQ.getRepository().getAll().size()) {
+        if(amount > serviceJQ.getAll().size() + serviceMQ.getAll().size()) {
            throw new NotEnoughQuestionsException("Not Enough Questions");
         }
 
@@ -31,11 +31,11 @@ public class ExaminerServiceImpl implements ExaminerService {
         while (questions.size() < amount) {
             Question question;
             if(key == 0) {
-                question = serviceJQ.getRandomQuestion((List<Question>) serviceJQ.getRepository().getAll());
+                question = serviceJQ.getRandomQuestion((List<Question>) serviceJQ.getAll());
                 if(question != null) questions.add(question);
                 key = 1;
             } else {
-                question = serviceMQ.getRandomQuestion((List<Question>) serviceMQ.getRepository().getAll());
+                question = serviceMQ.getRandomQuestion((List<Question>) serviceMQ.getAll());
                 if(question != null) questions.add(question);
                 key = 0;
             }
