@@ -16,22 +16,12 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Override
     public Question add(String question, String answer) {
-        Question newQuestion  = new Question(question,answer);
-        if(repository.getAll().contains(newQuestion)) {
-            return null;
-        }
-        repository.getAll().add(newQuestion);
-        return newQuestion;
+        return repository.add(question, answer);
     }
 
     @Override
     public Question remove(String question, String answer) {
-        Question questionToRemove = new Question(question, answer);
-        if (!repository.getAll().contains(questionToRemove)) {
-            return null;
-        }
-        repository.getAll().remove(questionToRemove);
-        return questionToRemove;
+        return  repository.remove(question, answer);
     }
 
     @Override

@@ -17,5 +17,25 @@ public class QuestionRepositoryImpl implements QuestionRepository {
         return questionsList;
     }
 
+    @Override
+    public Question add(String question, String answer) {
+        Question newQuestion  = new Question(question,answer);
+        if(this.questionsList.contains(newQuestion)) {
+            return null;
+        }
+        this.questionsList.add(newQuestion);
+        return newQuestion;
+    }
+
+    @Override
+    public Question remove(String question, String answer) {
+        Question questionToRemove = new Question(question, answer);
+        if (!this.questionsList.contains(questionToRemove)) {
+            return null;
+        }
+        this.questionsList.remove(questionToRemove);
+        return questionToRemove;
+    }
+
 
 }
